@@ -31,9 +31,19 @@ public class SparseMatrix {
     }
 
     public void insert(int row, int column, int value) {
+
         ValueNode newNode = new ValueNode(row, column, value);
-        MatrixRow r = getRow(row);
-        MatrixColumn c = getColumn(column);
+
+        MatrixRow r = firstRow;
+        MatrixColumn c = firstColumn;
+
+        for(int i = 0; i < row; i++){
+            r = r.getNext();
+        }
+        for(int i = 0; i < column; i++){
+            c = c.getNext();
+        }
+
 
         r.insert(newNode);
         c.insert(newNode);
@@ -63,15 +73,29 @@ public class SparseMatrix {
         MatrixRow current = firstRow;
 
         for(int i = 0; i < row; i++ ){
-            current = current.getNext();
+            if(current.getNext() != null) {
+                current = current.getNext();
+            }else{
+                return 0;
+            }
         }
 
-
-
-        return 0;
+        return current.get(column);
     }
 
     public void print() {
+
+        for(int i = 1; i <= this.totalRows; i++){
+            for(int j = 1; j <= this.totalColumns; j++){
+                int x = this.getValue(i,j);
+                if(x > 9){
+                    System.out.printf("  %d ", this.getValue(i,j));
+                }else{
+                    System.out.printf("  %d  ", this.getValue(i,j));
+                }
+            }
+            System.out.println();
+        }
 
     }
 
