@@ -89,10 +89,14 @@ public class SparseMatrix {
         for(int i = 1; i <= this.totalRows; i++){
             for(int j = 1; j <= this.totalColumns; j++){
                 int x = this.getValue(i,j);
-                if(x > 9){
-                    System.out.printf("  %d ", this.getValue(i,j));
-                }else{
-                    System.out.printf("  %d  ", this.getValue(i,j));
+                if(x < 9){
+                    System.out.printf("   %d   ", this.getValue(i,j));
+                }else if(x < 100){
+                    System.out.printf("   %d  ", this.getValue(i,j));
+                }else if(x < 1000){
+                    System.out.printf("   %d ", this.getValue(i,j));
+                }else if(x < 10000){
+                    System.out.printf("   %d", this.getValue(i,j));
                 }
             }
             System.out.println();
@@ -111,7 +115,24 @@ public class SparseMatrix {
         return transposedMatrix;
     }
 
-    public SparseMatrix produce(SparseMatrix other) {
-        return null;
+    public SparseMatrix product(SparseMatrix other){
+        SparseMatrix output = new SparseMatrix(this.totalRows, other.totalColumns);
+
+        for(int i = 1; i <= this.totalRows; i++){
+
+            for(int j = 1; j <= other.totalColumns; j++){
+                int sum = 0;
+
+                for(int k = 1; k <= this.totalColumns; k++){
+                    sum += this.getValue(i, k) * other.getValue(k,j);
+                }
+                output.insert(i , j, sum);
+            }
+        }
+
+
+        return output;
     }
+
+
 }
