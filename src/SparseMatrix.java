@@ -1,3 +1,4 @@
+import org.xml.sax.SAXParseException;
 
 public class SparseMatrix {
     private int totalRows;
@@ -100,7 +101,14 @@ public class SparseMatrix {
     }
 
     public SparseMatrix transpose() {
-        return null;
+        SparseMatrix transposedMatrix = new SparseMatrix(totalColumns, totalRows);
+
+            for (int i = 1; i <= this.totalRows; i++) {
+                for (int j = 1; j <= this.totalColumns; j++) {
+                    transposedMatrix.insert(j, i, getValue(i, j));
+                }
+            }
+        return transposedMatrix;
     }
 
     public SparseMatrix produce(SparseMatrix other) {

@@ -15,19 +15,19 @@ public class MatrixRow {
     }
 
     public void setNext(MatrixRow next) {
-        next.setFirst(this.first);;
+        next.setFirst(this.first);
         this.next = next;
     }
 
     public void insert(ValueNode value) {
-    if(first == null) {
-        this.first = value;
+        if(first == null) {
+            this.first = value;
 
-    } else if(first.getColumn() > value.getColumn()){
-        ValueNode tmp = first;
-        first = value;
-        first.setNextColumn(tmp);
-    }else { //after first
+        } else if(first.getColumn() > value.getColumn()){
+            ValueNode tmp = first;
+            first = value;
+            first.setNextColumn(tmp);
+        }else { //after first
 
             ValueNode current = first;
 

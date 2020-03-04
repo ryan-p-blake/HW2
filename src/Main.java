@@ -5,6 +5,8 @@ public class Main {
         MatrixReader mr = new MatrixReader();
         SparseMatrix s = mr.read("src/matrixA.txt");
         s.print();
+        System.out.println();
+        s.transpose().print();
 
     }
 //
